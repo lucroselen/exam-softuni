@@ -10,3 +10,6 @@ npm install nodemon --save-dev
 "start": "set NODE_ENV=development&& nodemon ./index.js",
 
 js_backend_exam
+
+css should go as:
+"../../css/style.css"
