@@ -3,6 +3,8 @@ const { isAuth, isOwner } = require("../middlewares/authMiddleware");
 const { errorHandler } = require("../middlewares/errorHandler");
 const router = express.Router();
 const authServices = require("../services/authServices");
+let generalError =
+  "We are experiencing technical difficulties and are working to resolve them. Thank you for your understanding!";
 
 router.get("/", async (req, res) => {
   try {
@@ -13,8 +15,7 @@ router.get("/", async (req, res) => {
     console.error(error);
     res.render("home", {
       title: "Homepage",
-      error:
-        "We are experiencing technical difficulties and are working to resolve them. Thank you for your understanding!",
+      error: generalError,
     });
   }
 });
