@@ -8,3 +8,5 @@ npm install nodemon --save-dev
 # add to scripts in package.json:
 
 "start": "set NODE_ENV=development&& nodemon ./index.js",
+
+js_backend_exam
