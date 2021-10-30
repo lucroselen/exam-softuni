@@ -1,4 +1,4 @@
-# exam-skeleton
+# exam-softuni
 
 SoftUni exam preparation skeleton
 
