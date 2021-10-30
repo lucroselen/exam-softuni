@@ -20,15 +20,15 @@ router.get("/logout", isAuth, (req, res) => {
 
 router.post("/login", isAlreadyLogged, async (req, res) => {
   try {
-    let { username, password } = req.body;
-    if (!username || !password) {
+    let { email, password } = req.body;
+    if (!email || !password) {
       res.render("login", { error: "You must fill in both fields!" });
       return;
     }
-    let user = await authServices.login(username, password);
+    let user = await authServices.login(email, password);
 
     if (!user) {
-      res.render("login", { error: "Invalid username or password!" });
+      res.render("login", { error: "Invalid email or password!" });
     } else {
       let token = await authServices.createToken(user);
 
@@ -44,14 +44,23 @@ router.post("/login", isAlreadyLogged, async (req, res) => {
 });
 
 router.post("/register", isAlreadyLogged, async (req, res) => {
-  let { username, password, rePassword } = req.body;
+  let { firstName, lastName, email, password, rePassword } = req.body;
+  email = email.toLowerCase();
 
   try {
+    if (firstName && lastName) {
+      firstName =
+        firstName[0].toUpperCase() + firstName.substring(1).toLowerCase();
+
+      lastName =
+        lastName[0].toUpperCase() + lastName.substring(1).toLowerCase();
+    }
+
     if (password !== rePassword) {
       res.render("register", { error: "Both passwords must be the same!" });
     } else {
-      await authServices.register(username, password);
-      let user = await authServices.login(username, password);
+      await authServices.register(firstName, lastName, email, password);
+      let user = await authServices.login(email, password);
       let token = await authServices.createToken(user);
 
       res.cookie(TOKEN_COOKIE_NAME, token, {

@@ -2,25 +2,58 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-  username: {
+  firstName: {
     type: String,
-    required: [true, "Username should not be empty!"],
-    minLength: [5, "Username should be at least 5 characters long!"],
-    validate: [
-      /^[A-Z0-9]*$/i,
-      "Username should consist only english letters and digits!",
+    required: [true, "You must populate your first name!"],
+    minlength: [
+      3,
+      "The first name should be at least 3 characters long and contains only English letters",
+    ],
+    validate: {
+      validator: function (v) {
+        return /^[A-Z][a-z]*$/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid name!`,
+    },
+  },
+  lastName: {
+    type: String,
+    required: [true, "You must populate your last name!"],
+    minlength: [
+      5,
+      "The last name should be at least 5 characters long and contains only English letters",
+    ],
+    validate: {
+      validator: function (v) {
+        return /^[A-Z][a-z]*$/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid name!`,
+    },
+  },
+  email: {
+    type: String,
+    required: [true, "Email should not be empty!"],
+    match: [
+      /^[a-z]*@[a-z]*(\.[a-z]{2,3})$/,
+      "Please fill a valid email address",
     ],
     unique: true,
   },
   password: {
     type: String,
     required: [true, "Password should not be empty!"],
-    minLength: [5, "Password should be at least 5 characters long!"],
+    minLength: [4, "Password should be at least 4 characters long!"],
     validate: [
       /^[A-Z0-9]*$/i,
       "Password should consist only english letters and digits!",
     ],
   },
+  myPosts: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
 });
 
 userSchema.post("save", function (error, doc, next) {

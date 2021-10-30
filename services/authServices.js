@@ -2,16 +2,17 @@ const User = require("../models/User");
 const { jwtSign } = require("../utils/jwtUtils");
 const { SECRET } = require("../config/constants");
 
-const register = (username, password) => User.create({ username, password });
+const register = (firstName, lastName, email, password) =>
+  User.create({ firstName, lastName, email, password });
 
-const login = (username, password) => {
-  return User.findOne({ username })
+const login = (email, password) => {
+  return User.findOne({ email })
     .then((user) => Promise.all([user.validatePassword(password), user]))
     .then(([isValid, user]) => {
       if (isValid) {
         return user;
       } else {
-        throw { message: "Cannot find username or password" };
+        throw { message: "Cannot find email or password" };
       }
     })
     .catch(() => null);
@@ -20,7 +21,7 @@ const login = (username, password) => {
 const createToken = function (user) {
   let payload = {
     _id: user._id,
-    username: user.username,
+    email: user.email,
   };
 
   return jwtSign(payload, SECRET);
