@@ -19,6 +19,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: [10, "The Date should be exactly 10 characters - 02.02.2021"],
+    match: [
+      /^[0-9]{2}.[0-9]{2}.[0-9]{4}$/,
+      "Please fill a valid date format - DD.MM.YYYY",
+    ],
   },
   image: {
     type: String,
