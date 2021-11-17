@@ -1,6 +1,6 @@
 # Description
 
-SoftUni exam preparation skeleton
+### SoftUni exam on nodeJs, express, express-handlebars and mongoDb
 
 This is a SoftUni MPA exam project.
 
