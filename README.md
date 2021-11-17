@@ -24,3 +24,8 @@ In the terminal, run the following command:
 npm start
 
 !! It will not start if MongoDB server is not installed and running as a service on the PC !!
+
+## Notice
+
+This project has NO test data ready. The user should first register and create test data using the built "create post" functionality.
+To see the different views/functionalities on the 'details' page (e.g. owner of posts can edit/delete; non-owner can like/dislike), please switch users.
