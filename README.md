@@ -1,15 +1,24 @@
-# exam-softuni
+# Description
 
 SoftUni exam preparation skeleton
+
+This is a SoftUni MPA exam project.
+
+It is meant to be run locally, so for that matter MongoDB is required to be installed and running as a service on the machine.
+
+# Prerequisites
+
+Before you start the project, please run the following commands in the terminal:
+
+npm i
+
+or manually:
 
 npm install bcrypt cookie-parser express express-handlebars jsonwebtoken mongoose
 npm install nodemon --save-dev
 
-# add to scripts in package.json:
+# How to start the project
 
-"start": "set NODE_ENV=development&& nodemon ./index.js",
+In the terminal, run the following command:
 
-js_backend_exam
-
-css should go as:
-"../../css/style.css"
+npm start
